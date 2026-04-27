@@ -1,8 +1,6 @@
 import random
-# 合法的出拳
-valid_choices = ["剪刀", "石頭" , "布"]
-# 電腦出拳選擇
-computer_choices = ["剪刀", "石頭", "布"]
+game_over = False
+choices = ["剪刀", "石頭" , "布"]
 
 # 電腦、玩家計分
 player_score = 0
@@ -10,16 +8,16 @@ computer_score = 0
 
 # 輸入
 while True:
-    player_choices = input("請輸入要出的拳: ")
+    player_choices = input("請輸入: ")
     
     if player_choices == "結束":
         break
     
-    if player_choices not in valid_choices:
+    if player_choices not in choices:
         print("輸入錯誤，請輸入 剪刀 / 石頭 / 布")
         continue
 
-    computer = random.choice(computer_choices)
+    computer = random.choice(choices)
 
     print(f"電腦出: {computer} ")
 
@@ -39,14 +37,17 @@ while True:
 
     # 先拿下5分者獲勝
     if player_score == 5 or computer_score == 5:
+        game_over = True
         break
-    
-if player_score > computer_score:
-    print("恭喜您贏得比賽!")
-elif player_score < computer_score:
-    print("非常可惜您輸了")
-else:
-    print("本場遊戲平手")
+
+if game_over:
+    print("您已棄賽")
+    if player_score > computer_score:
+        print("恭喜您贏得比賽!")
+    elif player_score < computer_score:
+        print("非常可惜您輸了")
+    else:
+        print("本場遊戲平手")
 
     
 

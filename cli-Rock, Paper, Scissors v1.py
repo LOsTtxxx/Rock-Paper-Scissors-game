@@ -2,17 +2,6 @@ import random
 game_over = False
 choices = ["剪刀", "石頭" , "布"]
 
-def judge(player , computer):
-    if (player == "剪刀" and computer == "布") or \
-       (player == "石頭" and computer == "剪刀") or \
-       (player == "布" and computer == "石頭"):
-        return "玩家贏"
-    elif player == computer:
-        return "平手"
-    else:
-        return "電腦贏"
-    
-
 # 電腦、玩家計分
 player_score = 0
 computer_score = 0
@@ -32,16 +21,17 @@ while True:
 
     print(f"電腦出: {computer} ")
 
-    result = judge(player_choices , computer)
-
-    if result == "玩家贏":
-        print("此回合玩家勝利")
-        player_score += 1
-    elif result == "電腦贏":
-        print("此回合電腦勝利")
-        computer_score += 1
-    else:
+    if player_choices == computer:
         print("平手")
+
+    elif (player_choices == "剪刀" and computer == "布") or \
+         (player_choices == "布" and computer == "石頭") or \
+         (player_choices == "石頭" and computer == "剪刀"):
+        print("恭喜您贏了")
+        player_score += 1      
+    else:
+        computer_score += 1
+        print("您輸了")
 
     print(f"目前比分 您: {player_score} : 電腦: {computer_score}" )
 
@@ -51,6 +41,7 @@ while True:
         break
 
 if game_over:
+    print("您已棄賽")
     if player_score > computer_score:
         print("恭喜您贏得比賽!")
     elif player_score < computer_score:
